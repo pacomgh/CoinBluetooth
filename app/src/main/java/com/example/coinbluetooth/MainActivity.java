@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +21,7 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnOn, btnOff, btnDis, btnData;
+    Button btnSendCode, btnGetCode, btnDis, btnData;
     String address = null;
     private ProgressDialog progress;
     BluetoothAdapter myBluetooth = null;
@@ -47,26 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         loadViews();
 
-
         new ConnectBT().execute(); //Call the class to connect
-
-        //commands to be sent to bluetooth
-        btnOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                turnOnLed();      //method to turn on
-            }
-        });
-
-        btnOff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txt.setText("Holi");
-                obtenerCodigo();   //method to turn off
-
-            }
-        });
-
         btnDis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,20 +54,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //btnData.setOnClickListener(new View.OnClickListener() {
-           // @Override
-           // public void onClick(View v) {
-           //     goToData();
-          //  }
-        //});
     }
 
     private void loadViews() {
         //call the widgtes
-        btnOn = (Button) findViewById(R.id.button2);
-        btnOff = (Button) findViewById(R.id.button3);
-        btnDis = (Button) findViewById(R.id.button4);
-        txt = findViewById(R.id.tvCodigo);
+        btnSendCode = findViewById(R.id.btnSendCode);
+        btnGetCode = findViewById(R.id.btnGetCode);
+        btnDis = findViewById(R.id.btnDisc);
+        txt = findViewById(R.id.tvCode);
     }
 
     private void Disconnect() {
@@ -103,21 +77,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //Obtener codigo
-    private void obtenerCodigo() {
+    private void obtenerCodigo(View v) {
+        String readMessage="";
         if (btSocket != null) {
             try {
                 btSocket.getOutputStream().write("b".getBytes());
                 InputStream socketInputStream =  btSocket.getInputStream();
                 byte[] buffer = new byte[256];
                 int bytes;
-
                 // Keep looping to listen for received messages
                 while (true) {
                     try {
                         bytes = socketInputStream.read(buffer);            //read bytes from input buffer
-                        String readMessage = new String(buffer, 0, bytes);
+                        readMessage = new String(buffer, 0, bytes);
                         // Send the obtained bytes to the UI Activity via handler
                         Log.i("logging ", readMessage + "");
+                        msg(readMessage);
                     } catch (IOException e) {
                         break;
                     }
@@ -126,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
                 msg("Error");
             }
         }
+        txt.setText(readMessage);
     }
 
-    private void turnOnLed() {
+    private void enviarCodigo(View view) {
         if (btSocket != null) {
             try {
                 btSocket.getOutputStream().write("a".getBytes());
@@ -138,12 +114,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    private void goToData() {
-        Intent i = new Intent(getApplicationContext(), GetData.class);
-        //              i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
-        startActivity(i);
-    }*/
 
     // fast way to call Toast
     private void msg(String s) {
