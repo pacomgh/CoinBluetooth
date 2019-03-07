@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Monedero Bluetooth</string>
+    <string name="deviceList">Device List</string>
+    <string name="btnPaired">Show Paired Devices</string>
+    <string name="txtReceive">Received Data</string>
+    <string name="btn">Test</string>
+    <string name="title">Monedero</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="disc">Disconnect</string>
+    <string name="access">Access Data</string>
+
+    <string name="getCode">Obtener Código</string>
+    <string name="sendCode">Enviar Código</string>
+    <string name="code">Codigo</string>
+</resources>
