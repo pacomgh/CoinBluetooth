@@ -16,18 +16,16 @@
         android:textSize="@dimen/medium"
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:id="@+id/button2"
+        android:onClick="enviarCodigo"
+        android:id="@+id/btnSendCode"
         android:layout_width="396dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
         android:layout_marginTop="121dp"
         android:background="@color/colorAccent"
         android:text="@string/sendCode"
@@ -35,41 +33,37 @@
         android:textSize="@dimen/medium" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnGetCode"
+        android:onClick="obtenerCodigo"
         android:layout_width="399dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
-        android:layout_alignEnd="@+id/button2"
-        android:layout_alignRight="@+id/button2"
+        android:layout_below="@+id/btnSendCode"
+        android:layout_alignEnd="@+id/btnSendCode"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
         android:layout_marginTop="-133dp"
         android:layout_marginEnd="-4dp"
-        android:layout_marginRight="-4dp"
         android:background="@color/colorAccent"
         android:text="@string/getCode"
         android:textColor="@color/white"
         android:textSize="@dimen/medium" />
 
     <Button
+        android:id="@+id/btnDisc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/orange"
-        android:textColor="@color/white"
-        android:textSize="@dimen/small"
-        android:text="@string/disc"
-        android:id="@+id/button4"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:background="@color/orange"
+        android:text="@string/disc"
+        android:textColor="@color/white"
+        android:textSize="@dimen/small" />
 
     <TextView
-        android:id="@+id/tvCodigo"
+        android:id="@+id/tvCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button3"
+        android:layout_below="@id/btnGetCode"
         android:layout_marginTop="120dp"
         android:text="" />
 
