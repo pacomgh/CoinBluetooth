@@ -54,6 +54,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnSendCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                enviarCodigo();
+            }
+        });
+
+        btnGetCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                obtenerCodigo();
+            }
+        });
+
     }
 
     private void loadViews() {
@@ -76,13 +90,14 @@ public class MainActivity extends AppCompatActivity {
         finish(); //return to the first layout
 
     }
+
     //Obtener codigo
-    private void obtenerCodigo(View v) {
-        String readMessage="";
+    private void obtenerCodigo() {
+        String readMessage = "";
         if (btSocket != null) {
             try {
                 btSocket.getOutputStream().write("b".getBytes());
-                InputStream socketInputStream =  btSocket.getInputStream();
+                InputStream socketInputStream = btSocket.getInputStream();
                 byte[] buffer = new byte[256];
                 int bytes;
                 // Keep looping to listen for received messages
@@ -104,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         txt.setText(readMessage);
     }
 
-    private void enviarCodigo(View view) {
+    private void enviarCodigo() {
         if (btSocket != null) {
             try {
                 btSocket.getOutputStream().write("a".getBytes());
